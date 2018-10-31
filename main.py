@@ -13,22 +13,19 @@ def calculaBitsverificacao(m):
 def geracao():
 
     bits = input()
+    redundancia = calculaBitsverificacao(len(bits))
     novaPalavra = ''
-    bitsLength = calculaBitsverificacao(len(bits))
-    
-
-    potencias = []
-
-    for i in range(bitsLength):
-        if (2**i <= bitsLength):
-            potencias.append(2**i)
-    
-"""     for i in range(bitsLength):
-        if ()
-        novaPalavra +=  """
-        
-
-
+    expoente = 0
+    aux = 0
+    j = 0
+    for i in range(redundancia):
+        Hamming = 2**i
+        while (aux < Hamming):
+            novaPalavra += bits[j]
+            aux += 1
+            j += 1
+        novaPalavra += "-"
+   
 
 def verificacao():
 
@@ -72,7 +69,4 @@ def verificacao():
         
     print(impares)
 
-print(calculaBitsverificacao(8))
-print(calculaBitsverificacao(16))
-print(calculaBitsverificacao(32))
-print(calculaBitsverificacao(64))
+geracao()
