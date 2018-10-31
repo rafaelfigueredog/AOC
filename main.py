@@ -1,6 +1,12 @@
-def calculaBitsverificacao(m): 
+from math import sqrt
 
-    return 
+def calculaBitsverificacao(m): 
+    expoente = 0
+    resultado = 0
+    while (resultado != m):
+        resultado = 2**expoente
+        expoente += 1 
+    return expoente
 
 
 
@@ -8,16 +14,18 @@ def geracao():
 
     bits = input()
     novaPalavra = ''
-    bitsLength = len(bits)
+    bitsLength = calculaBitsverificacao(len(bits))
+    
+
     potencias = []
 
     for i in range(bitsLength):
         if (2**i <= bitsLength):
             potencias.append(2**i)
     
-    for i in range(bitsLength):
+"""     for i in range(bitsLength):
         if ()
-        novaPalavra += 
+        novaPalavra +=  """
         
 
 
@@ -63,3 +71,8 @@ def verificacao():
         print(i)
         
     print(impares)
+
+print(calculaBitsverificacao(8))
+print(calculaBitsverificacao(16))
+print(calculaBitsverificacao(32))
+print(calculaBitsverificacao(64))
