@@ -1,5 +1,18 @@
 from math import sqrt
 
+def binary_search_ite(vet, num):
+	esquerda, direita, tentativa = 0, len(vet), 1
+	while 1:
+		meio = (esquerda + direita) // 2
+		aux_num = vet[meio]
+		if num == aux_num:
+			return tentativa
+		elif num > aux_num:
+			esquerda = meio
+		else:
+			direita = meio
+		tentativa += 1
+
 def calculaBitsverificacao(m): 
     expoente = 0
     resultado = 0
@@ -8,13 +21,11 @@ def calculaBitsverificacao(m):
         expoente += 1 
     return expoente
 
-
-
 def geracao(bits):
 
     redundancia = calculaBitsverificacao(len(bits))
     novaPalavra = ''
-    expoente = 0
+    lengthWord = len(bits) + redundancia
     aux = 0
     j = 0
     for i in range(redundancia):
@@ -27,13 +38,22 @@ def geracao(bits):
     
     print("Nova Palavra: " + novaPalavra + "\n")
 
-    verificacao(novaPalavra)
-
+    impar, dictresultados = verificacao(novaPalavra)
     
+    repetidos = [0]*(lengthWord)
+    procurados = []
+    for i in impar:    
+        for j in dictresultados[i].keys():
+            repetidos[j-1] += 1
+            if repetidos[j-1] == len(impar):
+                procurados.append(j)
+    print("Indices que se repetem em todos: ", procurados, "\n")
+    palavraGerada = ''
+
+
 
     return novaPalavra
    
-
 def verificacao(bits):
 
     bitsLength = len(bits)
@@ -45,7 +65,7 @@ def verificacao(bits):
     contagembits = {}
     contadoresUM = {}
     for j in potencias:
-        listadevalores = []
+        dictdevalores = {}
         contadorUm = 0
         alternador = 0 
         for i in range(j-1, bitsLength):
@@ -54,12 +74,12 @@ def verificacao(bits):
                 i += j
                 continue
             
-            listadevalores.append(bits[i])
+            dictdevalores[i+1] = bits[i]
             alternador += 1
             
             if bits[i] == "1":
                 contadorUm += 1
-        contagembits[j] = listadevalores
+        contagembits[j] = dictdevalores
         contadoresUM[j] = contadorUm
         
     impares = []
@@ -71,13 +91,22 @@ def verificacao(bits):
     
 
     print("Verificação\n")
-    for i in contagembits.items(): 
-        print(i)
+    for i in contagembits.keys(): 
+        print("Bit "+str(i)+":", contagembits[i])
 
-    print("\nContagem\n")
-    print(contadoresUM)
+    print("\nContagem de Verificação:\n")
+    for i in contadoresUM.keys():
+        print(str(i)+":", contadoresUM[i])
+
     print()
     print("Impares: " +  str(impares) + "\n")
-bits = input("\nDigite a palavra a ser enviada: ")
-print()
-geracao(bits) #1111000010101110
+
+    return impares, contagembits
+
+def main():
+    bits = input("\nDigite a palavra a ser enviada: ")
+    print()
+    geracao(bits) #1111000010101110
+
+
+main()
