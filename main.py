@@ -10,9 +10,8 @@ def calculaBitsverificacao(m):
 
 
 
-def geracao():
+def geracao(bits):
 
-    bits = input()
     redundancia = calculaBitsverificacao(len(bits))
     novaPalavra = ''
     expoente = 0
@@ -25,11 +24,18 @@ def geracao():
             aux += 1
             j += 1
         novaPalavra += "-"
+    
+    print("Nova Palavra: " + novaPalavra + "\n")
+
+    verificacao(novaPalavra)
+
+    
+
+    return novaPalavra
    
 
-def verificacao():
+def verificacao(bits):
 
-    bits = input()
     bitsLength = len(bits)
     potencias = []
 
@@ -62,11 +68,16 @@ def verificacao():
         if (contadoresUM[i] % 2 != 0):
             impares.append(i)
 
-    print(contadoresUM)
+    
 
+    print("Verificação\n")
     for i in contagembits.items(): 
         print(i)
-        
-    print(impares)
 
-geracao()
+    print("\nContagem\n")
+    print(contadoresUM)
+    print()
+    print("Impares: " +  str(impares) + "\n")
+bits = input("\nDigite a palavra a ser enviada: ")
+print()
+geracao(bits) #1111000010101110
