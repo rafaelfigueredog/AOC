@@ -1,17 +1,5 @@
 from math import sqrt
 
-def binary_search_ite(vet, num):
-	esquerda, direita, tentativa = 0, len(vet), 1
-	while 1:
-		meio = (esquerda + direita) // 2
-		aux_num = vet[meio]
-		if num == aux_num:
-			return tentativa
-		elif num > aux_num:
-			esquerda = meio
-		else:
-			direita = meio
-		tentativa += 1
 
 def calculaBitsverificacao(m): 
     expoente = 0
@@ -31,10 +19,14 @@ def geracao(bits):
     for i in range(redundancia):
         Hamming = 2**i
         while (aux < Hamming):
-            novaPalavra += bits[j]
+            if (aux+1 != Hamming):
+                novaPalavra += bits[j]
+                j += 1
+            else:
+                novaPalavra += "-"
             aux += 1
-            j += 1
-        novaPalavra += "-"
+            
+            
     
     print("Nova Palavra: " + novaPalavra + "\n")
 
@@ -50,8 +42,18 @@ def geracao(bits):
     print("Indices que se repetem em todos: ", procurados, "\n")
     palavraGerada = ''
 
-
-
+    replacebits = list(novaPalavra)
+    for i in procurados:
+        replacebits[i-1] = "1"
+    novaPalavra = ''
+    for i in replacebits:
+        if (i == "-"):
+            novaPalavra += "0"
+        else:
+            novaPalavra += i
+    
+    print("Nova Palavra:", novaPalavra, "\n")
+    
     return novaPalavra
    
 def verificacao(bits):
