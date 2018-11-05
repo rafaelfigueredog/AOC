@@ -1,6 +1,5 @@
 from math import sqrt
 
-
 def calculaBitsverificacao(m): 
     expoente = 0
     resultado = 0
@@ -9,6 +8,7 @@ def calculaBitsverificacao(m):
         expoente += 1 
     return expoente
 
+#1111000010101110
 def geracao(bits):
 
     redundancia = calculaBitsverificacao(len(bits))
@@ -16,34 +16,35 @@ def geracao(bits):
     lengthWord = len(bits) + redundancia
     aux = 0
     j = 0
-    for i in range(redundancia):
+    for i in range((redundancia+1)):
         Hamming = 2**i
         while (aux < Hamming):
+            if (aux == lengthWord):
+                break
             if (aux+1 != Hamming):
                 novaPalavra += bits[j]
                 j += 1
             else:
                 novaPalavra += "-"
             aux += 1
-            
-            
-    
+        
     print("Nova Palavra: " + novaPalavra + "\n")
 
     impar, dictresultados = verificacao(novaPalavra)
     
-    repetidos = [0]*(lengthWord)
+    """ repetidos = [0]*(lengthWord)
     procurados = []
+
     for i in impar:    
         for j in dictresultados[i].keys():
             repetidos[j-1] += 1
             if repetidos[j-1] == len(impar):
                 procurados.append(j)
-    print("Indices que se repetem em todos: ", procurados, "\n")
+    print("Indices que se repetem em todos: ", procurados, "\n") """
+    
     palavraGerada = ''
-
     replacebits = list(novaPalavra)
-    for i in procurados:
+    for i in impar:
         replacebits[i-1] = "1"
     novaPalavra = ''
     for i in replacebits:
@@ -69,18 +70,20 @@ def verificacao(bits):
     for j in potencias:
         dictdevalores = {}
         contadorUm = 0
-        alternador = 0 
-        for i in range(j-1, bitsLength):
-            if (alternador == j):
-                alternador = 0
+        alternadorpos = 0
+        i = j-1
+        while (i < bitsLength):
+            if (alternadorpos == j):
+                alternadorpos = 0
                 i += j
                 continue
             
             dictdevalores[i+1] = bits[i]
-            alternador += 1
-            
+            alternadorpos += 1
             if bits[i] == "1":
                 contadorUm += 1
+            
+            i += 1
         contagembits[j] = dictdevalores
         contadoresUM[j] = contadorUm
         
@@ -108,7 +111,6 @@ def verificacao(bits):
 def main():
     bits = input("\nDigite a palavra a ser enviada: ")
     print()
-    geracao(bits) #1111000010101110
-
+    geracao(bits)
 
 main()
