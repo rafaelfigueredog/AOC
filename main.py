@@ -62,11 +62,14 @@ def verificacao(bits):
     bitsLength = len(bits)
     potencias = []
 
-    for i in range(bitsLength):
-        if (2**i <= bitsLength):
+    i = 0
+    while 2**i <= bitsLength:
             potencias.append(2**i)
+            i+=1
+
     contagembits = {}
     contadoresUM = {}
+
     for j in potencias:
         dictdevalores = {}
         contadorUm = 0
@@ -86,16 +89,18 @@ def verificacao(bits):
             i += 1
         contagembits[j] = dictdevalores
         contadoresUM[j] = contadorUm
-        
+
+    # até aqui, fez toda a separação por bits de potencia de 2. 
+
     impares = []
 
     for i in contadoresUM.keys():
         if (contadoresUM[i] % 2 != 0):
             impares.append(i)
 
-    
+    # Paridade impar identificada.
 
-    print("Verificação\n")
+    print("\n\nVerificação\n")
     for i in contagembits.keys(): 
         print("Bit "+str(i)+":", contagembits[i])
 
@@ -106,11 +111,39 @@ def verificacao(bits):
     print()
     print("Impares: " +  str(impares) + "\n")
 
+    for i in impares:
+        for j in list(contagembits[].keys()).sort():
+            if 
+
     return impares, contagembits
 
 def main():
-    bits = input("\nDigite a palavra a ser enviada: ")
-    print()
-    geracao(bits)
+    
+    while(True):
+
+        print("\n     Hamming Aplicação    ")
+        print()
+        print("1 - Gerar")
+        print("2 - Verificar")
+        print("0 - Sair")
+        print()
+
+        opcao = input('# ')
+        
+
+        if (opcao == '1'):
+            print("Palavra: ", end='')
+            bits = input()
+            geracao(bits)
+        elif (opcao == '2'):
+            print("Palavra: ", end='')
+            bits = input()
+            verificacao(bits)
+        elif (opcao == '0'):
+            print("Saindo...")
+            break
+        else:
+            print('\033[31m'+'\n    Opção Invalida!\n'+'\033[0;0m')
+            
 
 main()
