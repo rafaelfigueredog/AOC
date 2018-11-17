@@ -8,6 +8,19 @@ def calculaBitsverificacao(m):
         expoente += 1 
     return expoente
 
+def buscaBinaria(vet, num):
+	esquerda, direita, tentativa = 0, len(vet), 1
+	while 1:
+		meio = (esquerda + direita) // 2
+		aux_num = vet[meio]
+		if num == aux_num:
+			return tentativa
+		elif num > aux_num:
+			esquerda = meio
+		else:
+			direita = meio
+		tentativa += 1
+
 #1111000010101110
 def geracao(bits):
 
@@ -111,9 +124,14 @@ def verificacao(bits):
     print()
     print("Impares: " +  str(impares) + "\n")
 
+    # Impressão de informações
+
     for i in impares:
-        for j in list(contagembits[].keys()).sort():
-            if 
+        listaValores = list(contagembits[i].keys())
+        verificacaoFinal = (bitsLength+1)*[0]
+        for j in listaValores:
+            verificacaoFinal[j] += 1
+        
 
     return impares, contagembits
 
