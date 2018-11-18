@@ -125,13 +125,21 @@ def verificacao(bits):
     print("Impares: " +  str(impares) + "\n")
 
     # Impressão de informações
-
+    verificacaoFinal = (bitsLength+1)*[0]
+    maior = 0
     for i in impares:
         listaValores = list(contagembits[i].keys())
-        verificacaoFinal = (bitsLength+1)*[0]
         for j in listaValores:
             verificacaoFinal[j] += 1
+            if verificacaoFinal[j] > maior:
+                maior = verificacaoFinal[j]
         
+    print(verificacaoFinal)
+    candidatosErro = []
+    for i in range(len(verificacaoFinal)):
+        if verificacaoFinal[i] == maior:
+            candidatosErro.append(i)
+    print(candidatosErro)
 
     return impares, contagembits
 
