@@ -218,5 +218,4 @@ def main():
         else:
             print('\033[31m'+'\n    Opção Invalida!\n'+'\033[0;0m')
             
-
 main()
