@@ -1,12 +1,60 @@
 from math import sqrt
 
-def calculaBitsverificacao(m): 
+def calculaPotencias(size): 
+    potencias = []
+    i = 0
+    while 2**i <= size:
+            potencias.append(2**i)
+            i+=1
+    return potencias
+
+def calculaRedundancia(m): 
     expoente = 0
     resultado = 0
     while (resultado != m):
         resultado = 2**expoente
         expoente += 1 
     return expoente
+
+def ConstrutorPalavra(palavra, condicao): 
+    
+    # Sobre a condição
+    # True para Enviar (Aumenta o tamanho)
+    # False pra Verificar (retorna a palavra sem a redundancia)
+
+    if condicao:
+        pass
+    else:
+        pass
+
+def SeparacaoPorBits(palavra, size):
+
+    potencias = calculaPotencias(size)
+
+    contagembits = {}
+    contadoresUM = {}
+
+    for j in potencias:
+        dictdevalores = {}
+        contadorUm = 0
+        alternadorpos = 0
+        i = j-1
+        while (i < size):
+            if (alternadorpos == j):
+                alternadorpos = 0
+                i += j
+                continue
+            
+            dictdevalores[i+1] = palavra[i]
+            alternadorpos += 1
+            if palavra[i] == "1":
+                contadorUm += 1
+            
+            i += 1
+        contagembits[j] = dictdevalores
+        contadoresUM[j] = contadorUm
+
+    return contagembits, contadoresUM
 
 def buscaBinaria(vet, num):
 	esquerda, direita, tentativa = 0, len(vet), 1
@@ -22,11 +70,11 @@ def buscaBinaria(vet, num):
 		tentativa += 1
 
 #1111000010101110
-def geracao(bits):
+def geracao(palavra):
 
-    redundancia = calculaBitsverificacao(len(bits))
+    redundancia = calculaRedundancia(len(palavra))
     novaPalavra = ''
-    lengthWord = len(bits) + redundancia
+    lengthWord = len(palavra) + redundancia
     aux = 0
     j = 0
     for i in range((redundancia+1)):
@@ -35,7 +83,7 @@ def geracao(bits):
             if (aux == lengthWord):
                 break
             if (aux+1 != Hamming):
-                novaPalavra += bits[j]
+                novaPalavra += palavra[j]
                 j += 1
             else:
                 novaPalavra += "-"
@@ -44,16 +92,6 @@ def geracao(bits):
     print("Nova Palavra: " + novaPalavra + "\n")
 
     impar, dictresultados = verificacao(novaPalavra)
-    
-    """ repetidos = [0]*(lengthWord)
-    procurados = []
-
-    for i in impar:    
-        for j in dictresultados[i].keys():
-            repetidos[j-1] += 1
-            if repetidos[j-1] == len(impar):
-                procurados.append(j)
-    print("Indices que se repetem em todos: ", procurados, "\n") """
     
     palavraGerada = ''
     replacebits = list(novaPalavra)
@@ -72,44 +110,19 @@ def geracao(bits):
    
 def verificacao(bits):
 
-    bitsLength = len(bits)
-    potencias = []
+    size = len(bits)
 
-    i = 0
-    while 2**i <= bitsLength:
-            potencias.append(2**i)
-            i+=1
-
-    contagembits = {}
-    contadoresUM = {}
-
-    for j in potencias:
-        dictdevalores = {}
-        contadorUm = 0
-        alternadorpos = 0
-        i = j-1
-        while (i < bitsLength):
-            if (alternadorpos == j):
-                alternadorpos = 0
-                i += j
-                continue
-            
-            dictdevalores[i+1] = bits[i]
-            alternadorpos += 1
-            if bits[i] == "1":
-                contadorUm += 1
-            
-            i += 1
-        contagembits[j] = dictdevalores
-        contadoresUM[j] = contadorUm
+    contagembits, contadoresUM = SeparacaoPorBits(bits, size)
 
     # até aqui, fez toda a separação por bits de potencia de 2. 
 
     impares = []
-
+    pares = []
     for i in contadoresUM.keys():
         if (contadoresUM[i] % 2 != 0):
             impares.append(i)
+        else:
+            pares.append(i)
 
     # Paridade impar identificada.
 
@@ -125,23 +138,58 @@ def verificacao(bits):
     print("Impares: " +  str(impares) + "\n")
 
     # Impressão de informações
-    verificacaoFinal = (bitsLength+1)*[0]
+    verificacao1 = (size+1)*[0]
     maior = 0
     for i in impares:
         listaValores = list(contagembits[i].keys())
         for j in listaValores:
-            verificacaoFinal[j] += 1
-            if verificacaoFinal[j] > maior:
-                maior = verificacaoFinal[j]
-        
-    print(verificacaoFinal)
-    candidatosErro = []
-    for i in range(len(verificacaoFinal)):
-        if verificacaoFinal[i] == maior:
-            candidatosErro.append(i)
-    print(candidatosErro)
+            verificacao1[j] += 1
+            if verificacao1[j] > maior:
+                maior = verificacao1[j]
+    
+    # encontrei repetidos até aqui. 
 
-    return impares, contagembits
+    candidatosErro = []
+    for i in range(len(verificacao1)):
+        if verificacao1[i] == maior:
+            candidatosErro.append(i)
+    
+    print("Candidatos a Erro:", candidatosErro)
+
+    verificacao2 = (size+1)*[0]
+    for i in pares:
+        listaValores = list(contagembits[i].keys())
+        for j in listaValores:
+            verificacao2[j] += 1
+    
+    idxBitError = -1
+    for i in candidatosErro:
+        if verificacao2[i] == 0:
+            idxBitError = i
+
+    print("Bit Errado:", idxBitError)
+
+    potencias = calculaPotencias(size)
+
+    fixpalavra = []
+    for i in bits:
+        fixpalavra.append(i)
+    fixpalavra[idxBitError] = '1'
+
+    remolver = size*[0]
+    for i in potencias:
+        fixpalavra[i] = '-'
+    
+    palavraOriginal = ''
+    for i in fixpalavra:
+        if (i != '-'):
+            palavraOriginal += i
+
+    # toString
+
+    print("Palavra Original: ", end="")
+    print(palavraOriginal)
+    print("\n")
 
 def main():
     
