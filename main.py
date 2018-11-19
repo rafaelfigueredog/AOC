@@ -69,7 +69,6 @@ def buscaBinaria(vet, num):
 			direita = meio
 		tentativa += 1
 
-#1111000010101110
 def geracao(palavra):
 
     redundancia = calculaRedundancia(len(palavra))
@@ -135,7 +134,7 @@ def verificacao(bits):
         print(str(i)+":", contadoresUM[i])
 
     print()
-    print("Impares: " +  str(impares) + "\n")
+    print("Impares: " +  str(impares))
 
     # Impressão de informações
     verificacao1 = (size+1)*[0]
@@ -174,11 +173,11 @@ def verificacao(bits):
     fixpalavra = []
     for i in bits:
         fixpalavra.append(i)
-    fixpalavra[idxBitError] = '1'
+    fixpalavra[idxBitError-1] = '1'
 
     remolver = size*[0]
     for i in potencias:
-        fixpalavra[i] = '-'
+        fixpalavra[i-1] = '-'
     
     palavraOriginal = ''
     for i in fixpalavra:
@@ -187,7 +186,7 @@ def verificacao(bits):
 
     # toString
 
-    print("Palavra Original: ", end="")
+    print("\nPalavra Original: ", end="")
     print(palavraOriginal)
     print("\n")
 
