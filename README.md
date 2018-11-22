@@ -5,9 +5,9 @@ Menu:
 
      Hamming Aplicação
 
-1 - Gerar
-2 - Verificar
-0 - Sair
+1 - Gerar\n
+2 - Verificar\n
+0 - Sair\n
 
 # Exemplo 1
 ---------------------------------------------
