@@ -1,9 +1,10 @@
-# AOC
-# Cógigo de Verificação e Correção de Erros.
+# Organização e Arquiterura de Computadores IFPB
+## Código de Verificação e Correção de Erros.
+##### Rafael Figueredo Guimarães
 
 Menu:
 
-###  Hamming Aplicação
+#####     Hamming Aplicação
 
 1 - Gerar <br />
 2 - Verificar <br />
