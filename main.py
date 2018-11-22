@@ -192,7 +192,7 @@ def verificacao(bits):
     remolver = size*[0]
     for i in potencias:
         fixpalavra[i-1] = '-'
-    
+        
     palavraOriginal = ''
     for i in fixpalavra:
         if (i != '-'):
@@ -226,7 +226,7 @@ def main():
             bits = input()
             verificacao(bits)
         elif (opcao == '0'):
-            print("Saindo...")
+            print("\n   Até a próxima!\n")
             break
         else:
             print('\033[31m'+'\n    Opção Invalida!\n'+'\033[0;0m')
