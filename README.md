@@ -1,10 +1,12 @@
 # Organização e Arquiterura de Computadores IFPB
 ## Código de Verificação e Correção de Erros.
-##### Rafael Figueredo Guimarães
+##### Rafael Figueredo Guimarães <br />
+
+####### Primeira Impressão<br />
 
 Menu:
 
-#####     Hamming Aplicação
+    Hamming Aplicação
 
 1 - Gerar <br />
 2 - Verificar <br />
