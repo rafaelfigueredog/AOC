@@ -1,21 +1,21 @@
-# AOC
-# Cógigo de Verificação e Correção de Erros. 
+# AOC\\
+# Cógigo de Verificação e Correção de Erros.\\
 
-Menu: 
+Menu:\\
 
-     Hamming Aplicação
+     Hamming Aplicação\\
 
-1 - Gerar\n
-2 - Verificar\n
-0 - Sair\n
+1 - Gerar\\
+2 - Verificar\\
+0 - Sair\\
 
-# Exemplo 1
+# Exemplo 1\\
 ---------------------------------------------
-# 1
-Palavra: 11010010
-Nova Palavra: --1-101-0010
-
-Verificação
+# 1\\
+Palavra: 11010010\\
+Nova Palavra: --1-101-0010\\
+\\
+Verificação\\
 
 Bit 1: {1: '-', 3: '1', 5: '1', 7: '1', 9: '0', 11: '1'}
 Bit 2: {2: '-', 3: '1', 6: '0', 7: '1', 10: '0', 11: '1'}
