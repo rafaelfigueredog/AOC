@@ -6,11 +6,12 @@
 
 Menu:
 
-    Hamming Aplicação
+<p>    Hamming Aplicação
 
 1 - Gerar <br />
 2 - Verificar <br />
 0 - Sair <br />
+</p>
 
 # Exemplo 1
 ---------------------------------------------
