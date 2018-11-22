@@ -27,6 +27,19 @@ def ConstrutorPalavra(palavra, condicao):
     else:
         pass
 
+def contadorParidade(contadoresUM):
+
+    impares = []
+    pares = []
+    for i in contadoresUM.keys():
+        if (contadoresUM[i] % 2 != 0):
+            impares.append(i)
+        else:
+            pares.append(i)
+
+    return impares, pares
+
+
 def SeparacaoPorBits(palavra, size):
 
     potencias = calculaPotencias(size)
@@ -56,19 +69,6 @@ def SeparacaoPorBits(palavra, size):
 
     return contagembits, contadoresUM
 
-def buscaBinaria(vet, num):
-	esquerda, direita, tentativa = 0, len(vet), 1
-	while 1:
-		meio = (esquerda + direita) // 2
-		aux_num = vet[meio]
-		if num == aux_num:
-			return tentativa
-		elif num > aux_num:
-			esquerda = meio
-		else:
-			direita = meio
-		tentativa += 1
-
 def geracao(palavra):
 
     redundancia = calculaRedundancia(len(palavra))
@@ -90,11 +90,25 @@ def geracao(palavra):
         
     print("Nova Palavra: " + novaPalavra + "\n")
 
-    impar, dictresultados = verificacao(novaPalavra)
-    
+    contagembits, contadoresUM = SeparacaoPorBits(novaPalavra, lengthWord)
+
+    impares, par = contadorParidade(contadoresUM)
+    #impar, dictresultados = verificacao(novaPalavra)
+
+    print("\n\nVerificação\n")
+    for i in contagembits.keys():
+        print("Bit " + str(i) + ":", contagembits[i])
+
+    print("\nContagem de Verificação:\n")
+    for i in contadoresUM.keys():
+        print(str(i) + ":", contadoresUM[i])
+
+    print()
+    print("Impares: " + str(impares))
+
     palavraGerada = ''
     replacebits = list(novaPalavra)
-    for i in impar:
+    for i in impares:
         replacebits[i-1] = "1"
     novaPalavra = ''
     for i in replacebits:
@@ -115,13 +129,7 @@ def verificacao(bits):
 
     # até aqui, fez toda a separação por bits de potencia de 2. 
 
-    impares = []
-    pares = []
-    for i in contadoresUM.keys():
-        if (contadoresUM[i] % 2 != 0):
-            impares.append(i)
-        else:
-            pares.append(i)
+    impares, pares = contadorParidade(contadoresUM)
 
     # Paridade impar identificada.
 
@@ -173,8 +181,14 @@ def verificacao(bits):
     fixpalavra = []
     for i in bits:
         fixpalavra.append(i)
-    fixpalavra[idxBitError-1] = '1'
 
+    #correção
+    if fixpalavra[idxBitError-1] == 1:
+        fixpalavra[idxBitError-1] = '0'
+    else:
+        fixpalavra[idxBitError-1] == '1'
+
+    
     remolver = size*[0]
     for i in potencias:
         fixpalavra[i-1] = '-'
@@ -202,7 +216,6 @@ def main():
         print()
 
         opcao = input('# ')
-        
 
         if (opcao == '1'):
             print("Palavra: ", end='')
