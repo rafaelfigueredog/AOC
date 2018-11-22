@@ -13,9 +13,9 @@ Menu:
 0 - Sair <br />
 </p>
 
-### Exemplo 1
+###Exemplo 1
 ---------------------------------------------
-1
+####### #1
 Palavra: 11010010 <br />
 Nova Palavra: --1-101-0010 <br />
 <br />
@@ -36,10 +36,9 @@ Contagem de Verificação:<br />
 Impares: [2, 8] <br />
 Nova Palavra: 011010110010 <br />
 <br />
-# Exemplo 2
+### Exemplo 2
 ---------------------------------------------
-
-2
+####### #2
 Palavra: 110100010100010110000<br />
 
 Verificação<br />
