@@ -5,7 +5,7 @@ Menu:
 
      Hamming Aplicação
 
-1 - Gerar \\
+1 - Gerar \newline
 2 - Verificar 
 0 - Sair
 
