@@ -3,7 +3,7 @@
 
 Menu:
 
-     Hamming Aplicação <br />
+     Hamming Aplicação<br />
 
 1 - Gerar <br />
 2 - Verificar <br />
