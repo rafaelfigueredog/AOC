@@ -1,7 +1,7 @@
-# AOC\
-# Cógigo de Verificação e Correção de Erros.\
+# AOC
+# Cógigo de Verificação e Correção de Erros.
 
-Menu:\
+Menu:
 
      Hamming Aplicação\
 
