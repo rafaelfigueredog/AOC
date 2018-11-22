@@ -5,14 +5,14 @@ Menu:
 
      Hamming Aplicação
 
-1 - Gerar \newline
-2 - Verificar 
-0 - Sair
+1 - Gerar \
+2 - Verificar \ 
+0 - Sair \
 
 # Exemplo 1
 ---------------------------------------------
-# 1\\
-Palavra: 11010010\\
+# 1\
+Palavra: 11010010\
 Nova Palavra: --1-101-0010\\
 \\
 Verificação\\
