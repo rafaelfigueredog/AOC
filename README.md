@@ -1,58 +1,63 @@
 # AOC
-# Códigos de correção de erros
+# Cógigo de Verificação e Correção de Erros. 
 
-  Erros em memórias
-    Picos de tensão
-    Raios cósmicos
-    
-# Distância de Hamming
-  Número de posições de bit que diferem entre duas palavras
-  Contagem de bits 1 após XOR entre duas palavras
-  Exemplos
-    Hamming(11110001, 00110000) = 3
-    Hamming(11011, 10011) = 1
-    Hamming(1010101, 0110011) = 4
+Menu: 
 
-# Redundância
-  Palavra de m bits
-  Detector/corretor de r bits
-  Palavra de código de n bits (n = m + r)
-  Redundância R = n / m
-# Detecção de erro único
-  Bit de paridade
-  Indica se quantidade de bits 1 é par ou ímpar
-  R = n / (n - 1)
-  Exemplo
-    01110001 = 0 (par) 1110001 (4)
-    11011101 = 1 (ímpar) 1011101 (5)
+     Hamming Aplicação
 
-# Correção de erro
-  Distância = 2d + 1
-  d é quantidade de erros
-  Error Detecting and Error Correcting Codes (HAMMING, 1950)
-  Exemplo
-    Palavras válidas: 0000000000, 0000011111, 1111100000 e 1111111111
-    Distância mínima = 5
-    Quantidade de erros
-    Distância = 2d + 1
-      5 = 2d + 1
-      2d = 5 - 1
-      2d = 4
-      d = 2
+1 - Gerar
+2 - Verificar
+0 - Sair
+
+# Exemplo 1
+---------------------------------------------
+# 1
+Palavra: 11010010
+Nova Palavra: --1-101-0010
+
+Verificação
+
+Bit 1: {1: '-', 3: '1', 5: '1', 7: '1', 9: '0', 11: '1'}
+Bit 2: {2: '-', 3: '1', 6: '0', 7: '1', 10: '0', 11: '1'}
+Bit 4: {4: '-', 5: '1', 6: '0', 7: '1', 12: '0'}
+Bit 8: {8: '-', 9: '0', 10: '0', 11: '1', 12: '0'}
+
+Contagem de Verificação:
+
+1: 4
+2: 3
+4: 2
+8: 1
+
+Impares: [2, 8]
+Nova Palavra: 011010110010
 
 
-# Limitações
-    Projeto de código para m bits de dados e r bits de verificação
-    Quantidade de palavras válidas = 2m
-    Para cada palavra válida, n palavras inválidas
-    Obtidas invertendo cada bit de cada vez
-    Total de padrões associado a cada palavra válida = n + 1
-    Soma das palavras inválidas com a válida
-    Condição
-      2m (n + 1) ≤ 2n
-      2m (m + r + 1) ≤ 2m + r
-      2m (m + r + 1) ≤ 2m . 2r
-      2m (m + r + 1) ≤ 2m . 2r
-      m + r + 1 ≤ 2r
-      Dado m, é possível estabelecer r mínimo
-      Linear x exponencial
+# Exemplo 2
+---------------------------------------------
+
+# 2
+Palavra: 110100010100010110000
+
+
+Verificação
+
+Bit 1: {1: '1', 3: '0', 5: '0', 7: '0', 9: '0', 11: '0', 13: '0', 15: '0', 17: '1', 19: '0', 21: '0'}
+Bit 2: {2: '1', 3: '0', 6: '0', 7: '0', 10: '1', 11: '0', 14: '1', 15: '0', 18: '0', 19: '0'}
+Bit 4: {4: '1', 5: '0', 6: '0', 7: '0', 12: '0', 13: '0', 14: '1', 15: '0', 20: '0', 21: '0'}
+Bit 8: {8: '1', 9: '0', 10: '1', 11: '0', 12: '0', 13: '0', 14: '1', 15: '0'}
+Bit 16: {16: '1', 17: '1', 18: '0', 19: '0', 20: '0', 21: '0'}
+
+Contagem de Verificação:
+
+1: 2
+2: 3
+4: 2
+8: 3
+16: 2
+
+Impares: [2, 8]
+Candidatos a Erro: [10, 11, 14, 15]
+Bit Errado: 10
+
+Palavra Original: 0000010001010000
